@@ -13,9 +13,8 @@ server.register((app, _, done) => {
 });
 
 const port = process.env.PORT || 4000;
-const host = ("RENDER" in process.env) ? `0.0.0.0` : `localhost`;
 
-server.listen({ port: Number(port), host: host }, (err, address) => {
+server.listen({ host: '::', port: Number(process.env.PORT) || 3000}, (err, address) => {
   if (err) {
     console.error(err)
     process.exit(1)

@@ -22,7 +22,8 @@ server.register((app, _, done) => {
     routes_1.allRoutes.forEach((routes) => routes.forEach((route) => app.route(route)));
     done();
 });
-server.listen({ port: 8080 }, (err, address) => {
+const port = process.env.PORT || 4000;
+server.listen({ port: Number(port) }, (err, address) => {
     if (err) {
         console.error(err);
         process.exit(1);
