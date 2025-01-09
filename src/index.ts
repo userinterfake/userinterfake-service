@@ -14,7 +14,7 @@ server.register((app, _, done) => {
 
 const port = process.env.PORT || 4000;
 
-server.listen({ host: '::', port: Number(process.env.PORT) || 3000}, (err, address) => {
+server.listen({ host: '::', port: Number(port)}, (err, address) => {
   if (err) {
     console.error(err)
     process.exit(1)
