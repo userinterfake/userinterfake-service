@@ -19,7 +19,7 @@ const getInterComments = (request, reply) => __awaiter(void 0, void 0, void 0, f
         include: {
             votes: true,
             user: true
-        }
+        },
     });
     reply.status(200).send(interComents);
 });

@@ -14,7 +14,7 @@ export const getInterComments = async (request: FastifyRequest<{
         include : {
             votes: true,
             user: true
-        }
+        },
     })
     
     reply.status(200).send(interComents)
