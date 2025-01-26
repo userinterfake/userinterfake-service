@@ -8,23 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUsers = void 0;
-const prisma_1 = __importDefault(require("../../../utils/prisma"));
-const getUsers = (request, reply) => __awaiter(void 0, void 0, void 0, function* () {
-    const users = yield prisma_1.default.user.findMany({
-        include: {
-            gameParameters: {
-                include: {
-                    game: true,
-                },
-            },
-            interComments: true,
-        }
-    });
-    reply.send(users);
-});
-exports.getUsers = getUsers;
+exports.RoutesVote = void 0;
+const createVote_1 = require("./createVote");
+exports.RoutesVote = [
+    {
+        method: "POST",
+        url: "/vote",
+        handler: (request, reply) => __awaiter(void 0, void 0, void 0, function* () {
+            return (0, createVote_1.createVote)(request, reply);
+        }),
+    },
+];

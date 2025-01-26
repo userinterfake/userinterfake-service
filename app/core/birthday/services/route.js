@@ -8,23 +8,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUsers = void 0;
-const prisma_1 = __importDefault(require("../../../utils/prisma"));
-const getUsers = (request, reply) => __awaiter(void 0, void 0, void 0, function* () {
-    const users = yield prisma_1.default.user.findMany({
-        include: {
-            gameParameters: {
-                include: {
-                    game: true,
-                },
-            },
-            interComments: true,
-        }
-    });
-    reply.send(users);
-});
-exports.getUsers = getUsers;
+exports.RoutesBirthday = void 0;
+const createBirthday_1 = require("./createBirthday");
+const getBirdthdayById_1 = require("./getBirdthdayById");
+exports.RoutesBirthday = [
+    {
+        method: "POST",
+        url: "/birthday",
+        handler: (request, reply) => __awaiter(void 0, void 0, void 0, function* () {
+            return (0, createBirthday_1.createBirthday)(request, reply);
+        }),
+    },
+    {
+        method: "GET",
+        url: "/birthday/:id",
+        handler: (request, reply) => __awaiter(void 0, void 0, void 0, function* () {
+            return (0, getBirdthdayById_1.getBirdthdayById)(request, reply);
+        }),
+    }
+];

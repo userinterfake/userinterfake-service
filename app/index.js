@@ -14,7 +14,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fastify_1 = __importDefault(require("fastify"));
 const routes_1 = require("./routes");
+const cors_1 = __importDefault(require("@fastify/cors"));
 const server = (0, fastify_1.default)();
+server.register(cors_1.default, {
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE']
+});
 server.get('/ping', (request, reply) => __awaiter(void 0, void 0, void 0, function* () {
     return 'pong\n';
 }));
@@ -23,7 +28,7 @@ server.register((app, _, done) => {
     done();
 });
 const port = process.env.PORT || 4000;
-server.listen({ host: '::', port: Number(process.env.PORT) || 3000 }, (err, address) => {
+server.listen({ port: Number(port) }, (err, address) => {
     if (err) {
         console.error(err);
         process.exit(1);

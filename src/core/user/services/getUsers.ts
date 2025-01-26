@@ -5,9 +5,10 @@ export const getUsers = async (request: any, reply: any) => {
         include: {
             gameParameters: {
                 include: {
-                    game: true
-                }
-            }
+                    game: true,
+                },
+            },
+            interComments: true,
         }
     })
     reply.send(users)

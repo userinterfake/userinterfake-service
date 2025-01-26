@@ -12,19 +12,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUsers = void 0;
+exports.createInterComment = void 0;
 const prisma_1 = __importDefault(require("../../../utils/prisma"));
-const getUsers = (request, reply) => __awaiter(void 0, void 0, void 0, function* () {
-    const users = yield prisma_1.default.user.findMany({
-        include: {
-            gameParameters: {
-                include: {
-                    game: true,
-                },
-            },
-            interComments: true,
-        }
-    });
-    reply.send(users);
+const createInterComment = (request, reply) => __awaiter(void 0, void 0, void 0, function* () {
+    const body = request.body;
+    console.log(body);
+    if (!body)
+        return { message: "Missing data" };
+    try {
+        const interComment = yield prisma_1.default.interComment.create({
+            data: body,
+        });
+        reply.status(201).send(interComment);
+    }
+    catch (error) {
+        reply.status(500).send({ message: error });
+    }
 });
-exports.getUsers = getUsers;
+exports.createInterComment = createInterComment;

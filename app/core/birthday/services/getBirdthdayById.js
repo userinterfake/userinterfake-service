@@ -12,19 +12,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUsers = void 0;
+exports.getBirdthdayById = void 0;
 const prisma_1 = __importDefault(require("../../../utils/prisma"));
-const getUsers = (request, reply) => __awaiter(void 0, void 0, void 0, function* () {
-    const users = yield prisma_1.default.user.findMany({
+const getBirdthdayById = (request, reply) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = request.params.id;
+    const user = yield prisma_1.default.user.findUnique({
+        where: {
+            twitch_id: id
+        },
         include: {
-            gameParameters: {
-                include: {
-                    game: true,
-                },
-            },
-            interComments: true,
+            birthday: true
         }
     });
-    reply.send(users);
+    if (!(user === null || user === void 0 ? void 0 : user.birthday))
+        return reply.callNotFound();
+    reply.status(200).send(user.birthday);
 });
-exports.getUsers = getUsers;
+exports.getBirdthdayById = getBirdthdayById;

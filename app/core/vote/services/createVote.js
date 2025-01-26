@@ -12,19 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUsers = void 0;
+exports.createVote = void 0;
 const prisma_1 = __importDefault(require("../../../utils/prisma"));
-const getUsers = (request, reply) => __awaiter(void 0, void 0, void 0, function* () {
-    const users = yield prisma_1.default.user.findMany({
-        include: {
-            gameParameters: {
-                include: {
-                    game: true,
-                },
-            },
-            interComments: true,
-        }
+const createVote = (request, reply) => __awaiter(void 0, void 0, void 0, function* () {
+    const body = request.body;
+    const vote = yield prisma_1.default.vote.create({
+        data: body,
     });
-    reply.send(users);
+    reply.status(201).send(vote);
 });
-exports.getUsers = getUsers;
+exports.createVote = createVote;

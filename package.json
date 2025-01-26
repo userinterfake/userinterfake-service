@@ -4,14 +4,16 @@
   "main": "src/index.ts",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "start": "node app/index.js"
+    "start": "tsc -p tsconfig.json; node app/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@fastify/cors": "^10.0.2",
     "@prisma/client": "^6.2.0",
+    "@sinclair/typebox": "^0.34.13",
     "@vercel/node": "^5.0.2",
     "fastify": "^5.2.1"
   },

@@ -12,19 +12,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUsers = void 0;
+exports.getUserById = void 0;
 const prisma_1 = __importDefault(require("../../../utils/prisma"));
-const getUsers = (request, reply) => __awaiter(void 0, void 0, void 0, function* () {
-    const users = yield prisma_1.default.user.findMany({
+const getUserById = (request, reply) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = request.params.id;
+    const user = yield prisma_1.default.user.findUnique({
+        where: {
+            twitch_id: id
+        },
         include: {
-            gameParameters: {
-                include: {
-                    game: true,
-                },
-            },
+            gameParameters: true,
+            birthday: true,
             interComments: true,
         }
     });
-    reply.send(users);
+    reply.send(user);
 });
-exports.getUsers = getUsers;
+exports.getUserById = getUserById;

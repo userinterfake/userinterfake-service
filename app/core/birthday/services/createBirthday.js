@@ -12,19 +12,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUsers = void 0;
+exports.createBirthday = void 0;
 const prisma_1 = __importDefault(require("../../../utils/prisma"));
-const getUsers = (request, reply) => __awaiter(void 0, void 0, void 0, function* () {
-    const users = yield prisma_1.default.user.findMany({
+const createBirthday = (request, reply) => __awaiter(void 0, void 0, void 0, function* () {
+    const body = request.body;
+    console.log(body);
+    if (!body)
+        return { message: "Missing data" };
+    const birthday = yield prisma_1.default.birthday.create({
+        data: body,
         include: {
-            gameParameters: {
-                include: {
-                    game: true,
-                },
-            },
-            interComments: true,
+            user: true
         }
     });
-    reply.send(users);
+    reply.status(201).send(birthday);
 });
-exports.getUsers = getUsers;
+exports.createBirthday = createBirthday;

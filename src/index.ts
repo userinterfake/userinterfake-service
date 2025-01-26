@@ -1,7 +1,13 @@
 import fastify from 'fastify'
 import { allRoutes } from './routes';
+import cors from '@fastify/cors'
 
 const server = fastify()
+
+server.register(cors, {
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
+})
 
 server.get('/ping', async (request, reply) => {
   return 'pong\n'
