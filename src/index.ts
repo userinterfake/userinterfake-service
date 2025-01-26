@@ -18,7 +18,7 @@ server.register((app, _, done) => {
   done();
 });
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 8080;
 
 server.listen({port: Number(port)}, (err, address) => {
   if (err) {
