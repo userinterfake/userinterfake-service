@@ -20,10 +20,8 @@ server.register((app, _, done) => {
 
 const port = process.env.PORT || 4000;
 
-server.listen({port: Number(port), host: '0.0.0.0'}, (err, address) => {
+server.listen({ host: '::', port: Number(process.env.PORT) || 4000 }, function (err, address) {
   if (err) {
-    console.error(err)
     process.exit(1)
   }
-  console.log(`Server escuchando en ${address}`)
-})
+});
