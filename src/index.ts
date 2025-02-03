@@ -18,12 +18,12 @@ server.register((app, _, done) => {
   done();
 });
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 4000;
 
 server.listen({port: Number(port)}, (err, address) => {
   if (err) {
     console.error(err)
     process.exit(1)
   }
-  console.log(`Server listening at ${address}`)
+  console.log(`Server escuchando en ${address}`)
 })
