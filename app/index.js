@@ -27,11 +27,11 @@ server.register((app, _, done) => {
     routes_1.allRoutes.forEach((routes) => routes.forEach((route) => app.route(route)));
     done();
 });
-const port = process.env.PORT || 8080;
-server.listen({ port: Number(port) }, (err, address) => {
+const port = process.env.PORT || 4000;
+server.listen({ port: Number(port), host: '0.0.0.0' }, (err, address) => {
     if (err) {
         console.error(err);
         process.exit(1);
     }
-    console.log(`Server listening at ${address}`);
+    console.log(`Server escuchando en ${address}`);
 });
