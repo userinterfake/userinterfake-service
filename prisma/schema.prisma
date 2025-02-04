@@ -55,7 +55,7 @@ model InterComment {
   username  String
   votes     Vote[]
   createdAt DateTime @default(now()) // Se establece automáticamente al crear un registro
-  updatedAt DateTime @updatedAt // Se actualiza automáticamente en cada cambio
+  updatedAt DateTime @default(now()) @updatedAt // Se actualiza automáticamente en cada cambio
 }
 
 model Vote {
