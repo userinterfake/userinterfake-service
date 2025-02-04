@@ -9,4 +9,5 @@ exports.InterComment = typebox_1.Type.Object({
     user_id: typebox_1.Type.String(),
     username: typebox_1.Type.String(),
     votes: typebox_1.Type.Object(interface_1.Vote),
+    createdAt: typebox_1.Type.Date(),
 });

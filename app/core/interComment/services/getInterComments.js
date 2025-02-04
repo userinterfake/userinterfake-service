@@ -20,6 +20,9 @@ const getInterComments = (request, reply) => __awaiter(void 0, void 0, void 0, f
             votes: true,
             user: true
         },
+        orderBy: {
+            createdAt: 'desc'
+        }
     });
     reply.status(200).send(interComents);
 });

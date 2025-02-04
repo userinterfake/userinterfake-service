@@ -1,5 +1,4 @@
 import { Static, Type } from '@sinclair/typebox'
-import { User } from '../../user/types/interface'
 import { Vote } from '../../vote/types/interface'
 
 export const InterComment: any  = Type.Object({
@@ -8,6 +7,7 @@ export const InterComment: any  = Type.Object({
     user_id: Type.String(),
     username: Type.String(),
     votes: Type.Object(Vote),
+    createdAt: Type.Date(),
     
 })
 
