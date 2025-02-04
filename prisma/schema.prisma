@@ -19,7 +19,19 @@ model User {
   gameParameters GameParameter[]
   interComments  InterComment[]
   birthday       Birthday?
+  isAdmin        Boolean         @default(false)
   votes          Vote[]
+}
+
+model PlatformConfigInterComment {
+  id            String  @id @default(uuid())
+  authorization Boolean
+}
+
+model ConfigInterComment {
+  id    String @id @default(uuid())
+  key   String @unique
+  value String
 }
 
 model Birthday {
