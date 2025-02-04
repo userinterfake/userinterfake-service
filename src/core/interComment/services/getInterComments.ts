@@ -15,7 +15,7 @@ export const getInterComments = async (request: FastifyRequest<{
             user: true
         },
         orderBy:{
-            createdAt: 'desc'
+            createdAt: 'asc'
         }
     })
     
