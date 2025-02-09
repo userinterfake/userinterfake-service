@@ -2,25 +2,26 @@ import fastify from 'fastify'
 import { allRoutes } from './routes';
 import cors from '@fastify/cors'
 import { Server } from 'socket.io'
+import { setupSocket } from './tictactoe/socket'
 
 const server = fastify()
 
 const app = server.server
 
 const io = new Server(app, {
-	cors: {
-		origin: '*',
-		methods: ['GET']
-	}
+    cors: {
+        origin: `${process.env.ORIGIN}`,
+        methods: ['GET']
+    }
 })
 
 server.register(cors, {
-  origin: '*',
+  origin: `${process.env.ORIGIN}`,
   methods: ['GET', 'POST', 'PUT', 'DELETE']
 })
 
 server.get('/ping', async (request, reply) => {
-  return 'ponddg\n'
+  return 'pong\n'
 })
 
 server.register((app, _, done) => {
@@ -31,20 +32,11 @@ server.register((app, _, done) => {
 const port = process.env.PORT || 4000
 
 server.ready((err) => {
-	if (err) {
-		console.error(err)
-		process.exit(1)
-	}
-	io.on('connection', (socket) => {{
-		console.log('a user connected');
-		socket.on('disconnect', () => {
-			console.log('user disconnected');
-		})
-		socket.on('message', (data) => {
-			console.log(data)
-			io.emit('message', data)
-		})
-	}})
+    if (err) {
+        console.error(err)
+        process.exit(1)
+    }
+    setupSocket(io)
 })
 
 server.listen({port: Number(port), host: '0.0.0.0'}, (err, address) => {
