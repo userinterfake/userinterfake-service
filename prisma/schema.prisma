@@ -75,7 +75,7 @@ model Vote {
   value      Boolean
   user       User         @relation(fields: [user_id], references: [id])
   user_id    String
-  comment    InterComment @relation(fields: [comment_id], references: [id])
+  comment    InterComment @relation(fields: [comment_id], references: [id], onDelete: Cascade)
   comment_id String
 
   @@unique([user_id, comment_id])

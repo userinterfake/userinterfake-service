@@ -4,7 +4,7 @@
   "main": "src/index.ts",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "start": "tsc -p tsconfig.json; node app/index.js"
+    "start": "tsc -p tsconfig.json && node app/index.js"
   },
   "keywords": [],
   "author": "",
